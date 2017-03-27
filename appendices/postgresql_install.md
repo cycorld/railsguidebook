@@ -1,4 +1,4 @@
-# Postgres (or PostgreSQL) 설치하기
+# Postgres \(or PostgreSQL\) 설치하기
 
 ### 맥 OSX에 설치하기
 
@@ -16,9 +16,7 @@ $ brew update
 $ brew install postgresql
 ```
 
-
 자세한 내용은 [여기](http://www.moncefbelyamani.com/how-to-install-postgresql-on-a-mac-with-homebrew-and-lunchy/)를 참고하기 바란다.
-
 
 ### 2. Postgre.app을 이용하여 설치하기
 
@@ -31,18 +29,22 @@ $ echo 'PATH="/Applications/Postgres.app/Contents/Versions/9.3/bin:$PATH"' >> ~/
 $ source ~/.bashrc
 ```
 
-
 ### 레일스 프로젝트를 위한 준비
-
 
 * 레일스 프로젝트에서 사용한 PostgreSQL 유저를 생성한다.
 
   ```bash
-$ createuser -P -d -e sampleuser
-Enter password for new role:
-Enter it again:
-CREATE ROLE sampleuser PASSWORD 'md5afd8d364af0c8efa11183c3454f56c52' NOSUPERUSER CREATEDB NOCREATEROLE INHERIT LOGIN;
-```
+  $ createuser -P -d -e sampleuser
+  Enter password for new role:
+  Enter it again:
+  CREATE ROLE sampleuser PASSWORD 'md5afd8d364af0c8efa11183c3454f56c52' NOSUPERUSER CREATEDB NOCREATEROLE INHERIT LOGIN;
+  ```
+
+* 데이터베이스를 생성한다.
+
+  ```bash
+  $ createdb -Osampleuser -Eutf8 mysite_development
+  ```
 
 
 * `config/database.yml`를 아래와 같이 수정한다.
@@ -51,11 +53,8 @@ CREATE ROLE sampleuser PASSWORD 'md5afd8d364af0c8efa11183c3454f56c52' NOSUPERUSE
   production:
     adapter: postgresql
     encoding: unicode
-    database: <database-name>   # 원하는 대로 DB 명을 정한다.
+    database: mysite_development
   ```
-
-
-
 
 
 
